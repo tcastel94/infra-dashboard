@@ -1,0 +1,16 @@
+# État d'exécution, sauvegardes, caches et bases GeoIP (régénérés au lancement ;
+# contiennent l'inventaire réseau réel : MAC, IP, ports, journal d'audit)
+/data/
+/logs/
+__pycache__/
+*.pyc
+*.pid
+*.lock
+*.bak
+
+# Secrets : ne jamais versionner la config d'exécution ni les clés
+.env
+*.key
+*.pem
+exec.json
+netscan.json

@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>InfraDash</title>
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2322d3ee'/%3E%3Cstop offset='1' stop-color='%23a78bfa'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%230a1120'/%3E%3Cpath d='M5 18h5l3-8 5 14 3-6h6' fill='none' stroke='url(%23g)' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preload" href="/vendor/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/app.css">
+<link rel="stylesheet" href="/css/port.css">
+<link rel="stylesheet" href="/css/v2.css">
+<link rel="stylesheet" href="/css/lan.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-overview" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></symbol>
+    <symbol id="i-flows" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 6h9M6.3 8.2l4.4 7.6M17.7 8.2l-4.4 7.6"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></symbol>
+    <symbol id="i-boxes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="m3 7 9 5 9-5M12 12v10"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-db" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></symbol>
+    <symbol id="i-backup" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l4 2"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15 9-6 6M9 9l6 6"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></symbol>
+    <symbol id="i-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="7" rx="2"/><rect x="3" y="14" width="18" height="7" rx="2"/><path d="M7 6.5h.01M7 17.5h.01M11 6.5h6M11 17.5h6"/></symbol>
+    <symbol id="i-nas" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h8M8 14h8"/><circle cx="12" cy="18" r="1"/></symbol>
+    <symbol id="i-claw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4M9 4h6"/><circle cx="9" cy="14" r="1.3"/><circle cx="15" cy="14" r="1.3"/><path d="M2 13v3M22 13v3"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 1 0-1.3-8.8A6 6 0 1 0 6 18.9"/><path d="M6 19h11.5"/></symbol>
+    <symbol id="i-router" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="13" width="20" height="8" rx="2"/><path d="M6 17h.01M10 17h.01M15 13V9M8.5 6.5a8 8 0 0 1 13 0M11 9a4.5 4.5 0 0 1 8 0"/></symbol>
+    <symbol id="i-pc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="13" rx="2"/><path d="M8 21h8M12 16v5"/></symbol>
+    <symbol id="i-devices" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="13" height="10" rx="1.5"/><rect x="15" y="8" width="6" height="12" rx="1.5"/><path d="M6 18h7"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+    <symbol id="i-vps" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 1 0-1.3-8.8A6 6 0 1 0 6 18.9"/><rect x="9" y="13" width="7" height="5" rx="1"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></symbol>
+    <symbol id="i-bug" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9.5 11.5 11 13l3.5-3.5"/></symbol>
+    <symbol id="i-ai" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></symbol>
+    <symbol id="i-ship" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15l1.5 4.5h15L21 15H3z"/><rect x="5" y="9" width="5" height="4" rx=".5"/><rect x="11" y="9" width="5" height="4" rx=".5"/><rect x="8" y="5" width="5" height="4" rx=".5"/><path d="M2 21.5c2 0 2-1 4-1s2 1 4 1 2-1 4-1 2 1 4 1 2-1 4-1"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></symbol>
+    <symbol id="i-gauge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 14l4-4"/><path d="M3.3 17a9 9 0 1 1 17.4 0"/><circle cx="12" cy="14" r="1.2"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M3 21v-5h5"/></symbol><symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+    <symbol id="i-tv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="13" rx="2"/><path d="M8 21h8"/></symbol>
+    <symbol id="i-speaker" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2"/><circle cx="12" cy="15" r="3.5"/><path d="M12 6h.01"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><circle cx="12" cy="13" r="3.2"/></symbol>
+    <symbol id="i-printer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6M10 22h4"/></symbol>
+    <symbol id="i-watch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 9v3l1.5 1M16.1 17.4 15.5 22h-7l-.6-4.6M7.9 6.6 8.5 2h7l.6 4.6"/></symbol>
+    <symbol id="i-tablet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M12 18h.01"/></symbol>
+    <symbol id="i-laptop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.3 2.5a1 1 0 0 1-.9 1.5H3.6a1 1 0 0 1-.9-1.5L4 16"/></symbol>
+    <symbol id="i-gamepad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12h4M8 10v4M15 13h.01M18 11h.01"/><rect x="2" y="6" width="20" height="12" rx="5"/></symbol>
+    <symbol id="i-plug" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5M9 8V2M15 8V2M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8z"/></symbol>
+    <symbol id="i-thermo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.5a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0z"/></symbol>
+    <symbol id="i-wifi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h.01M2 8.8a15 15 0 0 1 20 0M5 12.9a10 10 0 0 1 14 0M8.5 16.4a5 5 0 0 1 7 0"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+    <symbol id="i-unknown" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/></symbol>
+    <symbol id="i-cable" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v7a6 6 0 0 1-12 0z"/><path d="M10 16v6M14 16v6M9 3v3M15 3v3"/></symbol>
+    <symbol id="i-ports" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10v4M10 10v4M14 10v4M18 10v4"/></symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m16 8-2 6-6 2 2-6z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4v16l14-8z"/></symbol>
+    <symbol id="i-scan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 12h10"/></symbol>
+  </defs>
+</svg>
+
+<div class="app">
+  <aside class="side">
+    <div class="brand">
+      <div class="brand-logo"><svg width="18" height="18" viewBox="0 0 32 32"><path d="M3 18h5l3-8 5 14 3-6h8" fill="none" stroke="#22d3ee" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><b>InfraDash</b><small>homelab · NAS · clawhost</small></div>
+    </div>
+    <nav class="nav" id="nav"></nav>
+    <div class="side-foot" id="side-foot"></div>
+  </aside>
+
+  <main class="main">
+    <header class="top">
+      <div>
+        <h1 id="view-title">Vue d'ensemble</h1>
+        <div class="sub" id="view-sub"></div>
+      </div>
+      <div class="spacer"></div>
+      <button class="pill bell" id="alert-bell" title="Centre d'alertes"><svg width="15" height="15"><use href="#i-bell"/></svg><span id="alert-count">0</span></button>
+      <span class="pill" id="health-pill"><span class="dot"></span><span>Santé</span> <span class="score">–</span></span>
+      <span class="pill" id="conn-pill"><span class="dot live"></span><span id="conn-txt">connexion…</span></span>
+      <span class="pill mono" id="clock">--:--:--</span>
+    </header>
+
+    <!-- ================= VUE D'ENSEMBLE ================= -->
+    <section class="view" id="v-overview">
+      <div class="score-strip" id="ov-scores"></div>
+      <div class="kpis mt" id="ov-kpis"></div>
+      <div class="grid g3 mt" id="ov-hosts"></div>
+      <div class="grid g-main mt">
+        <div class="card flush">
+          <div class="topo small" id="ov-topo"></div>
+        </div>
+        <div class="card">
+          <h2>Diagnostics prioritaires <a class="r" href="#insights">tout voir →</a></h2>
+          <div id="ov-insights" class="scroll" style="max-height:330px"></div>
+        </div>
+      </div>
+      <div class="grid g3 mt">
+        <div class="card">
+          <h2>Horloge des tâches <span class="r hint">24 h glissantes</span></h2>
+          <div class="clock-wrap" id="ov-clock"></div>
+        </div>
+        <div class="card">
+          <h2>Prochaines exécutions <a class="r" href="#planning">planning →</a></h2>
+          <div class="next-list" id="ov-next"></div>
+        </div>
+        <div class="card">
+          <h2>Journal en direct <a class="r" href="#journal">tout →</a></h2>
+          <div id="ov-events" class="scroll" style="max-height:360px"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FLUX ================= -->
+    <section class="view" id="v-flows">
+      <div class="toolbar">
+        <div class="seg" id="flow-mode"><button data-m="topo" class="on">Topologie</button><button data-m="nas">Galaxie NAS</button><button data-m="homelab">Galaxie homelab</button><button data-m="lan">Réseau local</button></div>
+        <div class="seg" id="flow-opts"><button data-o="labels" class="on">Débits</button><button data-o="turbo">Turbo ×4</button></div>
+        <span class="hint" id="flow-hint">Particules proportionnelles au débit réel (échelle log). Survolez un lien ou un nœud.</span>
+      </div>
+      <div class="grid g-main">
+        <div class="card flush" style="display:flex"><div class="topo" id="flow-topo" style="flex:1"></div></div>
+        <div class="card">
+          <h2>Flux actifs <span class="r hint" id="flow-total"></span></h2>
+          <div id="flow-list" class="scroll" style="max-height:640px"></div>
+        </div>
+      </div>
+      <div class="grid g2 mt">
+        <div class="card"><h2>Trafic des machines <span class="r hint">temps réel</span></h2><div class="chart" id="ch-net-live"></div></div>
+        <div class="card"><h2>Clients du NAS <span class="r hint">conntrack, flux actifs</span></h2><div id="flow-clients"></div></div>
+      </div>
+    </section>
+
+    <!-- ================= MACHINES ================= -->
+    <section class="view" id="v-machines">
+      <div class="toolbar">
+        <div class="seg" id="mach-host"><button data-h="homelab" class="on">Homelab</button><button data-h="nas">NAS Unraid</button><button data-h="clawhost">clawhost</button></div>
+        <div class="seg" id="mach-range"><button data-r="1h">1 h</button><button data-r="6h">6 h</button><button data-r="24h" class="on">24 h</button><button data-r="7d">7 j</button><button data-r="30d">30 j</button></div>
+        <span class="hint" id="mach-hint"></span>
+      </div>
+      <div id="mach-body"></div>
+    </section>
+
+    <!-- ================= CONTENEURS ================= -->
+    <section class="view" id="v-containers">
+      <div class="toolbar">
+        <div class="seg" id="ct-host"><button data-h="all" class="on">Tous</button><button data-h="nas">NAS</button><button data-h="homelab">Homelab</button><button data-h="clawhost">clawhost</button></div>
+        <input class="search" id="ct-search" placeholder="Filtrer (nom, image, projet, catégorie)…">
+        <span class="hint" id="ct-count"></span>
+      </div>
+      <div class="card flush harbor-card"><div id="ct-harbor" class="harbor-wrap"></div></div>
+      <div class="card flush mt"><div class="tbl-wrap" style="max-height:none"><table id="ct-table"></table></div></div>
+    </section>
+
+    <!-- ================= VULNÉRABILITÉS ================= -->
+    <section class="view" id="v-vulns">
+      <div class="kpis" id="vu-kpis"></div>
+      <div class="grid g-main mt">
+        <div class="card"><h2>Plan de correction <span class="r hint" id="vu-plan-sub"></span></h2><div id="vu-refresh"></div><div id="vu-plan"></div></div>
+        <div>
+          <div class="card"><h2>Exposition &amp; priorités</h2><div class="chart" id="vu-chart"></div></div>
+          <div class="card mt" id="vu-lan-card"><h2>Autres appareils du réseau <span class="r hint">NetScan</span></h2><div id="vu-lan"></div></div>
+          <div class="card mt"><h2>Fins de vie logicielles <span class="r hint">endoflife.date</span></h2><div id="vu-eol"></div></div>
+          <div class="card mt"><h2>Sources <span class="r hint" id="vu-gen"></span></h2><div id="vu-sources"></div></div>
+        </div>
+      </div>
+      <div class="card mt">
+        <h2>Toutes les vulnérabilités détectées</h2>
+        <div class="toolbar">
+          <div class="seg" id="vu-host"><button data-h="all" class="on">Toutes</button><button data-h="homelab">Homelab</button><button data-h="nas">NAS</button><button data-h="clawhost">clawhost</button></div>
+          <div class="seg" id="vu-prio"><button data-p="all" class="on">Toutes priorités</button><button data-p="critique">Critique</button><button data-p="haute">Haute</button><button data-p="moyenne">Moyenne</button><button data-p="basse">Basse</button></div>
+          <input class="search" id="vu-search" placeholder="CVE, composant, conteneur…">
+          <span class="hint" id="vu-count"></span>
+        </div>
+        <div class="tbl-wrap"><table id="vu-table"></table></div>
+      </div>
+      <div class="card mt"><h2>Inventaire logiciel corrélé <span class="r hint" id="vu-inv-sub"></span></h2>
+        <div class="toolbar"><input class="search" id="vu-inv-search" placeholder="Filtrer l'inventaire (nom, version, hôte)…"></div>
+        <div class="tbl-wrap scroll" style="max-height:520px"><table id="vu-inv"></table></div></div>
+    </section>
+
+    <!-- ================= NOTES & AXES ================= -->
+    <section class="view" id="v-scores">
+      <div class="grid g-main">
+        <div class="card"><h2>Notes de l'infrastructure <span class="r hint" id="sc-sub"></span></h2><div id="sc-cats"></div></div>
+        <div class="card"><h2>Évolution <span class="r hint">1 point par jour</span></h2><div class="chart tall" id="sc-hist"></div></div>
+      </div>
+      <div class="grid g-main mt">
+        <div class="card"><h2>Axes d'amélioration <span class="r hint">triés par gain / effort</span></h2><div id="sc-axes"></div></div>
+        <div>
+          <div class="card"><h2>Centre d'alertes <span class="r" id="al-actions"></span></h2><div id="al-list"></div></div>
+          <div class="card mt"><h2>Être prévenu</h2><div id="al-notify"></div></div>
+        </div>
+      </div>
+      <div class="card mt"><h2>Détail du barème</h2><div class="grid g3" id="sc-detail"></div></div>
+    </section>
+
+    <!-- ================= FLUX SORTANTS ================= -->
+    <section class="view" id="v-egress">
+      <div class="kpis" id="eg-kpis"></div>
+      <div class="card flush mt"><div class="world-wrap" id="eg-map"></div></div>
+      <div class="grid g-main mt">
+        <div class="card"><h2>Destinations <span class="r hint" id="eg-sub"></span></h2>
+          <div class="toolbar"><div class="seg" id="eg-risk"><button data-r="all" class="on">Toutes</button><button data-r="eleve">Risque élevé</button><button data-r="moyen">Moyen</button><button data-r="faible">Faible</button></div>
+          <input class="search" id="eg-search" placeholder="Service, pays, IP, conteneur…"></div>
+          <div class="tbl-wrap"><table id="eg-table"></table></div></div>
+        <div>
+          <div class="card"><h2>À retenir</h2><div id="eg-findings"></div></div>
+          <div class="card mt"><h2>Par source</h2><div class="tbl-wrap"><table id="eg-sources"></table></div></div>
+          <div class="card mt"><h2>Visibilité</h2><div id="eg-coverage"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= IA & PRÉVISIONS ================= -->
+    <section class="view" id="v-ai">
+      <div class="grid g-main">
+        <div class="card" id="ai-card"></div>
+        <div>
+          <div class="card"><h2>Poser une question à l'IA locale <span class="r hint" id="ai-model"></span></h2>
+            <div class="ai-ask"><input class="search" id="ai-q" maxlength="500" placeholder="Ex. : pourquoi le NAS est-il si chargé ce soir ?"><button class="btn primary" id="ai-ask-btn">Demander</button></div>
+            <div id="ai-answer" class="mt"></div></div>
+          <div class="card mt"><h2>Garde-fous</h2><div id="ai-guard"></div></div>
+        </div>
+      </div>
+      <div class="card mt"><h2>Prévisions <span class="r hint">calculées sur l'historique VictoriaMetrics, sans IA</span></h2><div class="grid g3" id="fc-list"></div></div>
+    </section>
+
+    <!-- ================= PLANNING ================= -->
+    <section class="view" id="v-planning">
+      <div class="kpis" id="pl-kpis"></div>
+      <div class="grid g-main mt">
+        <div class="card"><h2>Frise des prochaines 24 h <span class="r legend-inline" id="pl-legend"></span></h2><div class="gantt" id="pl-gantt"></div></div>
+        <div class="card"><h2>Densité sur 7 jours <span class="r hint">exécutions / heure</span></h2><div class="chart tall" id="pl-heat"></div></div>
+      </div>
+      <div class="card mt">
+        <h2>Toutes les tâches planifiées</h2>
+        <div class="toolbar">
+          <div class="seg" id="pl-host"><button data-h="all" class="on">Toutes</button><button data-h="homelab">Homelab</button><button data-h="nas">NAS</button><button data-h="clawhost">clawhost</button></div>
+          <div class="seg" id="pl-cat"></div>
+          <input class="search" id="pl-search" placeholder="Rechercher une tâche…">
+        </div>
+        <div class="tbl-wrap"><table id="pl-table"></table></div>
+      </div>
+    </section>
+
+    <!-- ================= STOCKAGE ================= -->
+    <section class="view" id="v-storage">
+      <div class="card">
+        <h2>Array Unraid <span class="r" id="st-array-state"></span></h2>
+        <div class="array" id="st-array"></div>
+        <div id="st-parity" class="mt"></div>
+      </div>
+      <div class="grid g2 mt">
+        <div class="card"><h2>Historique des contrôles de parité</h2><div class="chart" id="st-parity-ch"></div></div>
+        <div class="card"><h2>Températures disques <span class="r hint">°C, VictoriaMetrics</span></h2><div class="chart" id="st-temps-ch"></div></div>
+      </div>
+      <div class="grid g2 mt">
+        <div class="card"><h2>Partages</h2><div class="tbl-wrap"><table id="st-shares"></table></div></div>
+        <div class="card"><h2>Montages &amp; sessions SMB <span class="r hint">qui monte quoi</span></h2><div id="st-mounts"></div></div>
+      </div>
+    </section>
+
+    <!-- ================= SAUVEGARDES ================= -->
+    <section class="view" id="v-backups">
+      <div class="card"><h2>Chaîne de sauvegarde <span class="r hint">animée lorsque des données transitent</span></h2><div id="bk-pipe"></div></div>
+      <div class="grid g4 mt" id="bk-cards"></div>
+      <div class="grid g2 mt">
+        <div class="card"><h2>Taille des sauvegardes dans le temps</h2><div class="chart tall" id="bk-sizes"></div></div>
+        <div class="card"><h2>Fraîcheur &amp; règle 3-2-1</h2><div id="bk-321"></div></div>
+      </div>
+    </section>
+
+    <!-- ================= RESEAU ================= -->
+    <section class="view" id="v-network">
+      <div class="kpis" id="nw-kpis"></div>
+      <div class="grid g2 mt">
+        <div class="card"><h2>Latences <span class="r hint">ping toutes les 10 s</span></h2><div class="chart" id="nw-lat"></div></div>
+        <div class="card"><h2>Speedtest <span class="r hint">14 derniers jours</span></h2><div class="chart" id="nw-speed"></div></div>
+      </div>
+      <div class="card mt"><h2>Exposition Internet <span class="r hint">Nginx Proxy Manager → services, vérifié toutes les 5 min</span></h2><div class="tbl-wrap"><table id="nw-public"></table></div></div>
+      <div class="grid g2 mt">
+        <div class="card"><h2>Tailscale <span class="r hint" id="nw-ts-sub"></span></h2><div class="tbl-wrap"><table id="nw-ts"></table></div></div>
+        <div class="card"><h2>Appareils du LAN <span class="r hint" id="nw-lan-sub"></span></h2><div class="tbl-wrap scroll"><table id="nw-lan"></table></div></div>
+      </div>
+      <div class="card mt"><h2>DNS AdGuard <span class="r hint">résolution testée toutes les 30 s</span></h2><div class="chart short" id="nw-dns"></div></div>
+    </section>
+
+    <!-- ================= RÉSEAU LOCAL ================= -->
+    <section class="view" id="v-lan">
+      <div class="kpis" id="ns-kpis"></div>
+      <div class="grid g2 mt">
+        <div class="card"><h2>À regarder <span class="r hint" id="ns-att-sub"></span></h2><div id="ns-att"></div></div>
+        <div class="card"><h2>NetScan <span class="r hint" id="ns-src-sub"></span></h2><div id="ns-state"></div></div>
+      </div>
+      <div class="card mt"><h2>Appareils du réseau <span class="r hint" id="ns-dev-sub"></span></h2>
+        <div class="toolbar lan-bar">
+          <button class="btn primary" id="lan-scan-btn">Scanner le réseau</button>
+          <label class="lan-deep" title="Teste une quarantaine de ports TCP courants sur chaque appareil présent et lit les bannières SSH / web"><input type="checkbox" id="lan-deep" checked> avec sondage des ports</label>
+          <span class="hint" id="lan-scan-msg"></span>
+          <span class="spacer"></span>
+          <div class="seg" id="ns-filter"><button data-f="all" class="on">En ligne</button><button data-f="new">Nouveaux</button><button data-f="todo">À identifier</button><button data-f="wifi">Wi-Fi</button><button data-f="wired">Ethernet</button><button data-f="off">Hors ligne</button></div>
+          <input class="search" id="lan-search" placeholder="Nom, IP, MAC, fabricant…">
+          <a class="btn ghost small" href="#flows/lan" id="ns-schema">Voir le schéma</a>
+        </div>
+        <div id="lan-progress"></div>
+        <div id="ns-devices"></div></div>
+    </section>
+
+    <!-- ================= PORTS ================= -->
+    <section class="view" id="v-ports">
+      <div class="toolbar"><div class="seg" id="pt-host"><button data-h="nas" class="on">NAS Unraid</button><button data-h="homelab">Homelab</button><button data-h="clawhost">clawhost</button></div>
+        <span class="hint" id="pt-src"></span></div>
+      <div class="kpis" id="pt-kpis"></div>
+      <div id="pt-conf" class="mt"></div>
+      <div class="grid g-main mt">
+        <div class="card"><h2>Ports utilisés <span class="r hint" id="pt-count"></span></h2>
+          <div class="toolbar"><div class="seg" id="pt-filter"><button data-f="all" class="on">Tous</button><button data-f="docker">Conteneurs</button><button data-f="sys">Système</button><button data-f="reserved">Réservés</button><button data-f="lan">Exposés LAN</button><button data-f="net">Internet</button><button data-f="db">Bases</button></div>
+            <input class="search" id="pt-search" placeholder="Port, service, conteneur…"></div>
+          <div class="tbl-wrap scroll" style="max-height:640px"><table id="pt-table"></table></div></div>
+        <div>
+          <div class="card"><h2>Ports libres <span class="r hint" id="pt-free-sub"></span></h2><div id="pt-free"></div></div>
+          <div class="card mt"><h2>Trouver des ports libres</h2>
+            <div class="pt-find"><input class="search" id="pt-from" type="number" min="1" max="65535" value="8000" aria-label="De"><span>à</span><input class="search" id="pt-to" type="number" min="1" max="65535" value="8099" aria-label="À"><button class="btn" id="pt-go">Chercher</button></div>
+            <div id="pt-found" class="mt"></div></div>
+          <div class="card mt"><h2>Appareils du LAN <span class="r hint">dernier sondage</span></h2><div id="pt-lan"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ARCHITECTE ================= -->
+    <section class="view" id="v-architect">
+      <div class="card"><div class="row-flex arch-head"><div><h2 style="margin:0">Architecte technique <span class="hint" id="ar-model"></span></h2>
+        <div class="cell-sub">Des règles vérifiables détectent les incohérences ; l'IA locale du NAS les transforme en plan d'architecture priorisé. Rien n'est exécuté.</div></div>
+        <span class="spacer"></span><button class="btn primary" id="ar-run">Analyser l'architecture</button></div><div id="ar-status" class="mt"></div></div>
+      <div class="grid g-main mt">
+        <div><div id="ar-result"></div></div>
+        <div class="card"><h2>Incohérences détectées <span class="r hint" id="ar-facts-sub"></span></h2><div id="ar-facts"></div></div>
+      </div>
+    </section>
+
+    <!-- ================= DIAGNOSTICS ================= -->
+    <section class="view" id="v-insights">
+      <div class="toolbar"><div class="seg" id="in-filter"><button data-l="all" class="on">Tout</button><button data-l="crit">Critique</button><button data-l="warn">Attention</button><button data-l="info">Info</button></div>
+      <span class="hint">Analyse automatique, recalculée toutes les 30 s. Le dashboard ne modifie rien : les actions sont des suggestions.</span></div>
+      <div class="grid g-main">
+        <div class="card"><div id="in-list"></div></div>
+        <div class="card"><h2>Santé des collecteurs</h2><div class="tbl-wrap"><table id="in-coll"></table></div></div>
+      </div>
+    </section>
+
+    <!-- ================= JOURNAL ================= -->
+    <section class="view" id="v-journal">
+      <div class="toolbar"><div class="seg" id="jr-filter"><button data-h="all" class="on">Tout</button><button data-h="homelab">Homelab</button><button data-h="nas">NAS</button><button data-h="clawhost">clawhost</button><button data-h="tailscale">Tailscale</button><button data-h="internet">Internet</button></div>
+      <span class="hint">Changements détectés : conteneurs, sauvegardes, disponibilité, notifications Unraid, pairs Tailscale.</span></div>
+      <div class="card"><div id="jr-list"></div></div>
+    </section>
+  </main>
+</div>
+<nav class="mnav" id="mnav"></nav>
+<div class="tip" id="tip"></div>
+<div class="alert-panel" id="alert-panel" hidden></div>
+
+<script src="/vendor/echarts.min.js"></script>
+<script src="/js/core.js"></script>
+<script src="/js/flows.js"></script>
+<script src="/js/port.js"></script>
+<script src="/js/worldmap.js"></script>
+<script src="/js/views.js"></script>
+<script src="/js/lan.js"></script>
+</body>
+</html>
